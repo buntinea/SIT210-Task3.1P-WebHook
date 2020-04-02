@@ -1,0 +1,28 @@
+const int sensor = A0;
+const int LED = D7;
+const int threshold = 200;
+int moisture;
+
+
+void setup() {
+    
+    pinMode(sensor, INPUT);
+    pinMode(LED, OUTPUT);
+
+}
+
+void loop() {
+    
+    moisture = analogRead(sensor);
+    Particle.publish("Moisture", String(moisture), PRIVATE);
+    
+    if(moisture<threshold){
+        digitalWrite(LED, HIGH);
+        
+    }
+    else{
+        digitalWrite(LED, LOW);
+    }
+
+    delay(30000);
+}
